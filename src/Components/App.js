@@ -5,6 +5,7 @@ import Comments from './Comments/Comments';
 import { Component } from 'react';
 import Header from './Header/Header';
 import './App.css'
+import CommentTable from './CommentTable/CommentTable';
 
 
 class App extends Component{
@@ -45,7 +46,8 @@ class App extends Component{
                     <Comments makeNewComment={this.addComment} />
                 </div>
 
-                <div><button onClick={this.getComments}>Click for videos!</button></div>
+                <div><button onClick={this.getComments}>Click for Comments!</button></div>
+                <CommentTable comments={this.state.comments} />
             </div>
             )
     }
