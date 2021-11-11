@@ -48,7 +48,7 @@ class App extends Component{
 
     dislike = async (comment) => {
         let updateComment = comment;
-        updateComment.dislike--;
+        updateComment.dislikes++;
         let response = await axios.put('http://127.0.0.1:8000/comment/'+comment.id+'/', updateComment);
         this.getComments()
     }
