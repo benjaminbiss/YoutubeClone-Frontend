@@ -17,6 +17,11 @@ class App extends Component{
         }
     }
 
+    setMount(){
+        this.getComments();
+        this.addComment();
+    }
+
     getComments = async () => {
         let response = await axios.get("http://127.0.0.1:8000/comment/");
         this.setState({
@@ -39,6 +44,8 @@ class App extends Component{
                 <div class='comments'>
                     <Comments makeNewComment={this.addComment} />
                 </div>
+
+                <div><button onClick={this.getComments}>Click for videos!</button></div>
             </div>
             )
     }
