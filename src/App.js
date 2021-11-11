@@ -1,6 +1,7 @@
 import { googleapikey } from './keys';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Comment from './Components/Comments/Comment';
 
 function App() {
 
@@ -11,7 +12,6 @@ function App() {
     
     // variables: take out api key and video id
     useEffect(async () => {
-        console.log("Noticed Change of video?");
         let result = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${googleapikey}&part=snippet&type=video&id=DxfEbulyFcY`)
         setVideo(result.data.items[0])
         setTitle(result.data.items[0].snippet.title)
@@ -28,6 +28,7 @@ function App() {
             <h2>Video: {videoTitle}</h2>
             <p><strong>Details:</strong> {videoDetail}</p>
             </div>
+            <Comment videoID={videoID}/>
         </div>
     );
 }
