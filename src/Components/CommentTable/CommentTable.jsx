@@ -2,6 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 
 function CommentTable(props){
+
     return(
         <div className='table'>
             <table>
@@ -16,6 +17,8 @@ function CommentTable(props){
                             <td>{comment.comment}</td>
                             <td>{comment.likes}</td>
                             <td>{comment.dislikes}</td>
+                            <td><button onClick={() => props.like(comment)}>Like</button></td>
+                            <td><button>Disike</button></td>
                         </tr>
 
                     )

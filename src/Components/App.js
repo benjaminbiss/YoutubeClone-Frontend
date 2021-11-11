@@ -13,14 +13,17 @@ class App extends Component{
         super(props)
 
         this.state = {
-            comments: []
-
+            comments: [],
         }
     }
 
-    setMount(){
+    componentDidMount(){
         this.getComments();
+    }
+
+    setMount(){
         this.addComment();
+        this.like();
     }
 
     getComments = async () => {
@@ -35,6 +38,13 @@ class App extends Component{
         this.getComments()
     }
 
+    like = async (comment) => {
+        let updateComment = comment;
+        updateComment.like++;
+        let response = await axios.put('http://127.0.0.1:8000/comment/'+comment.id+'/', updateComment);
+        this.getComments()
+    }
+
     render(){
         return(
             <div>
@@ -46,8 +56,10 @@ class App extends Component{
                     <Comments makeNewComment={this.addComment} />
                 </div>
 
-                <div><button onClick={this.getComments}>Click for Comments!</button></div>
-                <CommentTable comments={this.state.comments} />
+                <div>
+                    <button onClick={this.getComments}>Click for Comments!</button>
+                </div>
+                <CommentTable comments={this.state.comments} like={this.like} />
             </div>
             )
     }
