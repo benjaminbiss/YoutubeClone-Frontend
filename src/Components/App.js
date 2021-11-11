@@ -40,7 +40,7 @@ class App extends Component{
 
     like = async (comment) => {
         let updateComment = comment;
-        updateComment.like++;
+        updateComment.likes++;
         let response = await axios.put('http://127.0.0.1:8000/comment/'+comment.id+'/', updateComment);
         this.getComments()
     }
