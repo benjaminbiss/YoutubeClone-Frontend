@@ -4,6 +4,7 @@ import { googleapikey } from './keys';
 import Comments from './Comments/Comments';
 import { Component } from 'react';
 import Header from './Header/Header';
+import './App.css'
 
 
 class App extends Component{
@@ -31,9 +32,13 @@ class App extends Component{
     render(){
         return(
             <div>
-            <Header />
-            <iframe width="800px" height="600px" src="https://www.youtube.com/embed/DxfEbulyFcY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <Comments makeNewComment={this.addComment} />
+                <Header />
+                <div class='videoPlayer'>
+                    <iframe width="800px" height="600px" src="https://www.youtube.com/embed/DxfEbulyFcY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class='comments'>
+                    <Comments makeNewComment={this.addComment} />
+                </div>
             </div>
             )
     }
