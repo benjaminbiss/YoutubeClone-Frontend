@@ -1,21 +1,35 @@
 import React from 'react';
-import React, {Component} from 'react';
-
+import { Component } from 'react';
 
 class Comments extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            comment: '',
+            likes: 0,
+            dislikes: 0,
+            video_id: ''
+        }
+    }
+
+    handlesChanges = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleSubmit = (event) =>{
+        event.preventDefault();
+        this.props.makeNewComment(this.state)
+    }
 
     render(){
-        const { commentLine } = this.props;
         return(
-            <ul className="comments-list">
-                {commentLine.map((val) => {return
-                <li className="each-comment"
-                key={val.commentId}>{val.text}
-                </li>
-                })
-            }
-            </ul>
-        )};
+            <form onSubmit={this.handleSubmit}>
+                <input type='text' name='comment' onChange={this.handlesChanges} />
+                <button type='submit'>Add Comment</button>
+            </form>
+        )
+    }
 }
-
-export default Comments;
+export default Comments
