@@ -18,7 +18,7 @@ function CommentTable(props){
                             <td>{comment.likes}</td>
                             <td>{comment.dislikes}</td>
                             <td><button onClick={() => props.like(comment)}>Like</button></td>
-                            <td><button>Disike</button></td>
+                            <td><button onClick={() => props.dislike(comment)}>Dislike</button></td>
                         </tr>
 
                     )
