@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import "./Header.css";
 import axios from 'axios';
@@ -11,7 +10,6 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Avatar } from "@material-ui/core";
 import logo from "../logo.svg";
 
-
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -23,20 +21,15 @@ class Header extends Component {
         query: ''
         }
     }
-
-
-
     handlesChanges = (event) => {
         this.setState({
             [event.target.name]: event.target.value
         })
     }
-
     handleSubmit = (event) =>{
         event.preventDefault();
         this.getVideos();
     }
-
     getVideos = async () => {
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.state.query}&type=video&key=${googleapikey}&part=snippet`);
         this.setState({
@@ -58,8 +51,8 @@ class Header extends Component {
         
       </div>
       <div className="header__input">
-          <form onSubmit={this.handleSubmit}>
-          <input type='text' name='query' onChange={this.handlesChanges} style={{
+          <form onSubmit={this.props.handleSubmit}>
+          <input type='text' name='query' onChange={this.props.handlesChanges} style={{
             flex: 1,
             border: "none",
             padding: "8.3px 20px",
