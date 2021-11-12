@@ -5,7 +5,7 @@ class Replies extends Component{
     constructor(props){
         super(props);
         this.state = {
-            comment_pk: '',
+            comment_pk: this.props.comment_pk,
             likes: 0,
             dislikes: 0,
             video_id: '',
