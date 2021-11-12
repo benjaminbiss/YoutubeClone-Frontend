@@ -6,9 +6,8 @@ import { Component } from 'react';
 import './App.css'
 import CommentTable from './CommentTable/CommentTable';
 import VideoList from './VideoList/VideoList';
-import Reply from './Replies/Replies';
 import Header from './Header/Header';
-
+import Replies from './Replies/Replies';
 
 
 class App extends Component{
@@ -30,7 +29,7 @@ class App extends Component{
     componentDidMount(){
         this.getComments();
         this.getVideoDetials();
-        this.getReplies();
+        this.getDefaultVideos();
     }
 
     setMount(){
@@ -90,7 +89,7 @@ class App extends Component{
     }
 
     getVideoDetials = async () => {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${googleapikey}&part=snippet&type=video&id=M576WGiDBdQ`);
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${googleapikey}&part=snippet&type=video&id=DxfEbulyFcY`);
         this.setState({
                 shownVideoID: response.data.items[0].id,
                 shownVideoTitle: response.data.items[0].snippet.title,
@@ -107,15 +106,19 @@ class App extends Component{
         console.log(this.state.videos)
     }
 
+    getDefaultVideos = async () => {
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=DxfEbulyFcY&type=video&key=${googleapikey}&part=snippet`);
+        this.setState({
+              videos: response.data.items,
+            });
+        console.log(this.state.videos)
+    }
+
     render(){
         return(
             <div>
                 <div class='videoHeader'>
-                    <h2>YouTube Clone</h2>
-                    <form onSubmit={this.handleSubmit}>
-                    <input type='text' name='query' onChange={this.handlesChanges} />
-                    <button type='submit'>Search</button>
-                    </form>
+                    <Header getVideos={this.getVideos} handlesChanges={this.handleSubmit} handleSubmit={this.handleSubmit}/>
                 </div>
                 <div class='videoPlayer'>
                     {/* <EmbededVideo /> */}
@@ -131,13 +134,7 @@ class App extends Component{
                 <div class='comments'>
                     <Comments makeNewComment={this.addComment} />
                     <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike} replies={this.state.replies} />
-                    <Reply makeNewReply={this.addReply} />
-                </div>
-                <div class='searchResults'>
-                    SearchResults
-                </div>
-                <div>
-                    <Header />
+                    <Replies makeNewReply={this.addReply} />
                 </div>
             </div>
             )

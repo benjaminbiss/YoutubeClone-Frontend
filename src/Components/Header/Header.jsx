@@ -9,6 +9,7 @@ import AppsIcon from "@material-ui/icons/Apps";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Avatar } from "@material-ui/core";
 import logo from "../logo.svg";
+
 class Header extends Component {
     constructor(props) {
         super(props);
@@ -36,6 +37,9 @@ class Header extends Component {
             });
         console.log(this.state.videos)
     }
+
+
+
     render() { 
  
   return (
@@ -47,8 +51,8 @@ class Header extends Component {
         
       </div>
       <div className="header__input">
-          <form onSubmit={this.handleSubmit}>
-          <input type='text' name='query' onChange={this.handlesChanges} style={{
+          <form onSubmit={this.props.handleSubmit}>
+          <input type='text' name='query' onChange={this.props.handlesChanges} style={{
             flex: 1,
             border: "none",
             padding: "8.3px 20px",
