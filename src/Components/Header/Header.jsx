@@ -58,8 +58,8 @@ class Header extends Component {
         
       </div>
       <div className="header__input">
-          <form onSubmit={this.handleSubmit}>
-          <input type='text' name='query' onChange={this.handlesChanges} style={{
+          <form onSubmit={this.props.handleSubmit}>
+          <input type='text' name='query' onChange={this.props.handlesChanges} style={{
             flex: 1,
             border: "none",
             padding: "8.3px 20px",
