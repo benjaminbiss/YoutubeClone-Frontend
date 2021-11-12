@@ -17,7 +17,7 @@ class VideoList extends Component {
                     return (
                         <tr>
                             <td>{items.snippet.title}</td>
-                            <td>{items.snippet.thumbnails.default.url}</td>
+                            <iframe width="100px" height="100px" src={items.snippet.thumbnails.default.url}></iframe>
                         </tr>
                         )
                     })}

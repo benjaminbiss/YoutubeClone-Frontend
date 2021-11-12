@@ -2,7 +2,7 @@
     justify-content: left;
     display: flex;
     align-items: center;
-    width: auto;
+    width: 50%;
     height: auto;
     margin-top: 25px;
     margin-left: 5%;
@@ -30,6 +30,15 @@
     justify-content: left;
     align-items: center;
     width: auto;
+    height: auto;
+    margin-top: 25px;
+    margin-left: 5%;
+}
+
+.videoTable {
+    justify-content: right;
+    align-items: center;
+    width: 50%;
     height: auto;
     margin-top: 25px;
     margin-left: 5%;
