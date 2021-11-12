@@ -14,11 +14,16 @@ class App extends Component{
 
         this.state = {
             comments: [],
+            shownVideoID: '',
+            shownVideoTitle: '',
+            shownVideoDetail: ''
+
         }
     }
 
     componentDidMount(){
         this.getComments();
+        this.getVideoDetials();
     }
 
     setMount(){
@@ -53,19 +58,30 @@ class App extends Component{
         this.getComments()
     }
 
+    getVideoDetials = async () => {
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${googleapikey}&part=snippet&type=video&id=M576WGiDBdQ`);
+        this.setState({
+                shownVideoID: response.data.items[0].id,
+                shownVideoTitle: response.data.items[0].snippet.title,
+                shownVideoDetail: response.data.items[0].snippet.description,
+        });
+        console.log(response)
+    }
+
     render(){
         return(
             <div>
                 <Header />
                 <div class='videoPlayer'>
+                    {/* <EmbededVideo /> */}
                     <iframe width="800px" height="600px" src="https://www.youtube.com/embed/DxfEbulyFcY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div>
+                    <h2>Title: {this.state.shownVideoTitle}</h2>
+                    <p>Video Details: {this.state.shownVideoDetail}</p>
                 </div>
                 <div class='comments'>
                     <Comments makeNewComment={this.addComment} />
-                </div>
-
-                <div>
-                    <button onClick={this.getComments}>Click for Comments!</button>
                 </div>
                 <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike}/>
             </div>
