@@ -68,6 +68,11 @@ class App extends Component{
         console.log(response)
     }
 
+    deleteComment = async (id) => {
+        let response = await axios.delete("http://127.0.0.1:8000/comment/" + id + "/");
+        this.getComments()
+    }
+
     render(){
         return(
             <div>
@@ -82,7 +87,7 @@ class App extends Component{
                 </div>
                 <div class='comments'>
                     <Comments makeNewComment={this.addComment} />
-                    <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike}/>
+                    <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike} deleteComment={this.deleteComment}/>
                 </div>
             </div>
             )
