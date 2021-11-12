@@ -6,6 +6,7 @@ import { Component } from 'react';
 import './App.css'
 import CommentTable from './CommentTable/CommentTable';
 import VideoList from './VideoList/VideoList';
+import Reply from './Replies/Replies';
 
 
 class App extends Component{
@@ -14,6 +15,7 @@ class App extends Component{
 
         this.state = {
             comments: [],
+            replies: [],
             videos: [],
             shownVideoID: '',
             shownVideoTitle: '',
@@ -26,12 +28,14 @@ class App extends Component{
     componentDidMount(){
         this.getComments();
         this.getVideoDetials();
+        this.getReplies();
     }
 
     setMount(){
         this.addComment();
         this.like();
         this.dislike();
+        this.addReply();
     }
 
     handlesChanges = (event) => {
@@ -55,6 +59,18 @@ class App extends Component{
     addComment = async (text) => {
         let response = await axios.post("http://127.0.0.1:8000/comment/", text);
         this.getComments()
+    }
+
+    getReplies = async () => {
+        let response = await axios.get("http://127.0.0.1:8000/reply/");
+        this.setState({
+            replies: response.data
+        });
+    }
+
+    addReply = async (text) => {
+        let response = await axios.post("http://127.0.0.1:8000/reply/", text);
+        this.getReplies()
     }
 
     like = async (comment) => {
@@ -112,7 +128,8 @@ class App extends Component{
                 </div>
                 <div class='comments'>
                     <Comments makeNewComment={this.addComment} />
-                    <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike}/>
+                    <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike} replies={this.state.replies} />
+                    <Reply makeNewReply={this.addReply} />
                 </div>
                 <div class='searchResults'>
                     SearchResults
