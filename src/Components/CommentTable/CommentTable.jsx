@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Replies from '../Replies/Replies';
 
 
 function CommentTable(props){
@@ -20,6 +21,7 @@ function CommentTable(props){
                             <td><button onClick={() => props.like(comment)}>Like</button></td>
                             <td><button onClick={() => props.dislike(comment)}>Dislike</button></td>
                             <td><button onClick={() => props.deleteComment(comment.id)}>Delete</button></td>
+                            <td><Replies comment_pk={comment.id} makeNewReply={props.makeNewReply}/></td>
                         </tr>
 
                     )

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
 
-class Reply extends Component{
+class Replies extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -24,6 +24,8 @@ class Reply extends Component{
         this.props.makeNewReply(this.state)
     }
 
+    
+
     render(){
         return(
             <form onSubmit={this.handleSubmit}>
@@ -33,4 +35,4 @@ class Reply extends Component{
         )
     }
 }
-export default Reply
+export default Replies

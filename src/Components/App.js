@@ -16,7 +16,7 @@ class App extends Component{
 
         this.state = {
             comments: [],
-            replies: [],
+            reply: [],
             videos: [],
             shownVideoID: '',
             shownVideoTitle: '',
@@ -65,7 +65,7 @@ class App extends Component{
     getReplies = async () => {
         let response = await axios.get("http://127.0.0.1:8000/reply/");
         this.setState({
-            replies: response.data
+            reply: response.data
         });
     }
 
@@ -133,8 +133,8 @@ class App extends Component{
                 </div>
                 <div class='comments'>
                     <Comments makeNewComment={this.addComment} />
-                    <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike} replies={this.state.replies} />
-                    <Replies makeNewReply={this.addReply} />
+                    <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike} replies={this.state.replies} makeNewReply={this.addReply}/>
+                    
                 </div>
             </div>
             )
