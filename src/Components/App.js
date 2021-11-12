@@ -7,6 +7,8 @@ import './App.css'
 import CommentTable from './CommentTable/CommentTable';
 import VideoList from './VideoList/VideoList';
 import Reply from './Replies/Replies';
+import Header from './Header/Header';
+
 
 
 class App extends Component{
@@ -133,6 +135,9 @@ class App extends Component{
                 </div>
                 <div class='searchResults'>
                     SearchResults
+                </div>
+                <div>
+                    <Header />
                 </div>
             </div>
             )
