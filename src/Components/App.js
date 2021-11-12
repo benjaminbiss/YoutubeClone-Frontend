@@ -7,7 +7,6 @@ import './App.css'
 import CommentTable from './CommentTable/CommentTable';
 import VideoList from './VideoList/VideoList';
 import Header from './Header/Header';
-import Replies from './Replies/Replies';
 
 
 class App extends Component{
@@ -28,6 +27,7 @@ class App extends Component{
 
     componentDidMount(){
         this.getComments();
+        this.getReplies();
         this.getVideoDetials();
         this.getDefaultVideos();
     }
@@ -117,23 +117,26 @@ class App extends Component{
     render(){
         return(
             <div>
-                <div class='videoHeader'>
+                <div className='videoHeader'>
                     <Header getVideos={this.getVideos} handlesChanges={this.handleSubmit} handleSubmit={this.handleSubmit}/>
                 </div>
-                <div class='videoPlayer'>
-                    {/* <EmbededVideo /> */}
-                    <iframe width="800px" height="600px" src="https://www.youtube.com/embed/DxfEbulyFcY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div className='videoContainer'>
+                    <div className='videoPlayerLayer'>
+                        <div className='videoPlayer'>
+                            <iframe width="1600rem" height="900rem" src="https://www.youtube.com/embed/DxfEbulyFcY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div>
+                        <VideoList videos={this.state.videos}/>
+                    </div>
                 </div>
-                <div>
-                    <VideoList videos={this.state.videos}/>
-                </div>
-                <div class="videoFooter">
+                <div className="videoFooter">
                     <h2>Title: {this.state.shownVideoTitle}</h2>
                     <p>Video Details: {this.state.shownVideoDetail}</p>
                 </div>
-                <div class='comments'>
+                <div className='comments'>
                     <Comments makeNewComment={this.addComment} />
-                    <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike} replies={this.state.replies} makeNewReply={this.addReply}/>
+                    <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike} reply={this.state.reply} makeNewReply={this.addReply}/>
                     
                 </div>
             </div>
