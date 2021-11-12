@@ -25,3 +25,12 @@
     margin-top: 25px;
     margin-left: 5%;
 }
+
+.videoHeader {
+    justify-content: left;
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin-top: 25px;
+    margin-left: 5%;
+}

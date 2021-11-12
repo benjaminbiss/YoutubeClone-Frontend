@@ -3,10 +3,8 @@ import axios from 'axios';
 import { googleapikey } from './keys';
 import Comments from './Comments/Comments';
 import { Component } from 'react';
-import Header from './Header/Header';
 import './App.css'
 import CommentTable from './CommentTable/CommentTable';
-import SearchResults from './SearchBar/SearchBar';
 
 
 class App extends Component{
@@ -15,9 +13,11 @@ class App extends Component{
 
         this.state = {
             comments: [],
+            videos: [],
             shownVideoID: '',
             shownVideoTitle: '',
-            shownVideoDetail: ''
+            shownVideoDetail: '',
+            query: ''
 
         }
     }
@@ -25,13 +25,23 @@ class App extends Component{
     componentDidMount(){
         this.getComments();
         this.getVideoDetials();
-        this.getVideos();
     }
 
     setMount(){
         this.addComment();
         this.like();
         this.dislike();
+    }
+
+    handlesChanges = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleSubmit = (event) =>{
+        event.preventDefault();
+        this.getVideos();
     }
 
     getComments = async () => {
@@ -71,7 +81,7 @@ class App extends Component{
     }
 
     getVideos = async () => {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${googleapikey}&part=snippet&type=video&q=${this.state.inputSearch}`);
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.state.query}&type=video&key=${googleapikey}&part=snippet`);
         this.setState({
               videos: response.data.items,
             });
@@ -81,7 +91,13 @@ class App extends Component{
     render(){
         return(
             <div>
-                <Header shownVideoID={this.state.shownVideoID}/>
+                <div class='videoHeader'>
+                    <h2>YouTube Clone</h2>
+                    <form onSubmit={this.handleSubmit}>
+                    <input type='text' name='query' onChange={this.handlesChanges} />
+                    <button type='submit'>Search</button>
+                    </form>
+                </div>
                 <div class='videoPlayer'>
                     {/* <EmbededVideo /> */}
                     <iframe width="800px" height="600px" src="https://www.youtube.com/embed/DxfEbulyFcY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -95,7 +111,7 @@ class App extends Component{
                     <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike}/>
                 </div>
                 <div class='searchResults'>
-                    <SearchResults videos={this.state.videos} />
+                    SearchResults
                 </div>
             </div>
             )
