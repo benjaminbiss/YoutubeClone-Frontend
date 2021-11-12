@@ -1,1 +1,0 @@
-export const googleapikey= 'AIzaSyBlwC97_ozhppOgAhc0YKA2vQOk1xE9eFc'
