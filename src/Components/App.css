@@ -1,17 +1,27 @@
 .videoPlayer {
-    justify-content: center;
+    justify-content: left;
     display: flex;
     align-items: center;
     width: auto;
     height: auto;
     margin-top: 25px;
+    margin-left: 5%;
 }
 
 .comments {
-    justify-content: center;
-    display: flex;
+    justify-content: left;
     align-items: center;
     width: auto;
     height: auto;
     margin-top: 25px;
+    margin-left: 5%;
+}
+
+.videoFooter {
+    justify-content: left;
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin-top: 25px;
+    margin-left: 5%;
 }

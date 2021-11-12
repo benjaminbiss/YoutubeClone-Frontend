@@ -76,14 +76,14 @@ class App extends Component{
                     {/* <EmbededVideo /> */}
                     <iframe width="800px" height="600px" src="https://www.youtube.com/embed/DxfEbulyFcY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <div>
+                <div class="videoFooter">
                     <h2>Title: {this.state.shownVideoTitle}</h2>
                     <p>Video Details: {this.state.shownVideoDetail}</p>
                 </div>
                 <div class='comments'>
                     <Comments makeNewComment={this.addComment} />
+                    <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike}/>
                 </div>
-                <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike}/>
             </div>
             )
     }
