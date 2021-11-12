@@ -6,6 +6,7 @@ import { Component } from 'react';
 import Header from './Header/Header';
 import './App.css'
 import CommentTable from './CommentTable/CommentTable';
+import SearchResults from './SearchBar/SearchBar';
 
 
 class App extends Component{
@@ -24,6 +25,7 @@ class App extends Component{
     componentDidMount(){
         this.getComments();
         this.getVideoDetials();
+        this.getVideos();
     }
 
     setMount(){
@@ -68,6 +70,14 @@ class App extends Component{
         console.log(response)
     }
 
+    getVideos = async () => {
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${googleapikey}&part=snippet&type=video&q=${this.state.inputSearch}`);
+        this.setState({
+              videos: response.data.items,
+            });
+        console.log(response)
+    }
+
     render(){
         return(
             <div>
@@ -83,6 +93,9 @@ class App extends Component{
                 <div class='comments'>
                     <Comments makeNewComment={this.addComment} />
                     <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike}/>
+                </div>
+                <div class='searchResults'>
+                    <SearchResults videos={this.state.videos} />
                 </div>
             </div>
             )
