@@ -76,7 +76,7 @@ class App extends Component{
     render(){
         return(
             <div>
-                <Header />
+                <Header shownVideoID={this.state.shownVideoID}/>
                 <div class='videoPlayer'>
                     {/* <EmbededVideo /> */}
                     <iframe width="800px" height="600px" src="https://www.youtube.com/embed/DxfEbulyFcY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

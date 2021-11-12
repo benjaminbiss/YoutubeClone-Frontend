@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './Header.css';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -8,8 +8,27 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { Avatar } from '@material-ui/core';
 import logo from '../logo.svg'
 import Search from '@material-ui/icons/Search';
-function Header() {
-  const [inputSearch, setInputSearch] = useState("");
+import SearchBar from '../SearchBar/SearchBar';
+
+class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {inputSearch:''}
+  }
+
+
+    handlesChanges = (event) => {
+      this.setState({
+          [event.target.name]: event.target.value
+      })
+  }
+
+  handleSubmit = (event) =>{
+      event.preventDefault();
+      this.props.makeNewComment(this.state)
+  }
+
+  render() { 
   return (
     <div className="header">
       <div className="header__left">
@@ -30,11 +49,11 @@ function Header() {
             fontSize: "16px",
           }}
         />
-        {/* <SearchBar />
+        <SearchBar shownVideoID={this.props.shownVideoID}/>
           <SearchIcon
             className="header__inputButton"
             style={{ color: "#9b9b9b", padding: "4px 10px" }}
-          /> */}
+          />
       </div>
       <div className="header__right">
         <VideoCallIcon style={{ color: "white", marginLeft: "10px" }} />
@@ -49,5 +68,6 @@ function Header() {
       </div>
     </div>
   );
+}
 }
 export default Header;
