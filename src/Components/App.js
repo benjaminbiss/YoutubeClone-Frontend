@@ -5,6 +5,7 @@ import Comments from './Comments/Comments';
 import { Component } from 'react';
 import './App.css'
 import CommentTable from './CommentTable/CommentTable';
+import VideoList from './VideoList/VideoList';
 
 
 class App extends Component{
@@ -85,7 +86,7 @@ class App extends Component{
         this.setState({
               videos: response.data.items,
             });
-        console.log(response)
+        console.log(this.state.videos)
     }
 
     render(){
@@ -101,6 +102,9 @@ class App extends Component{
                 <div class='videoPlayer'>
                     {/* <EmbededVideo /> */}
                     <iframe width="800px" height="600px" src="https://www.youtube.com/embed/DxfEbulyFcY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div>
+                    <VideoList videos={this.state.videos}/>
                 </div>
                 <div class="videoFooter">
                     <h2>Title: {this.state.shownVideoTitle}</h2>
