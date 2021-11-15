@@ -17,7 +17,7 @@ class VideoList extends Component {
                 {this.props.videos.map((items) => {
                     return (
                         <tr>
-                            <button onClick={() => this.props.findVideo(items.id.videoId)}>
+                            <button class="button videobutton" onClick={() => this.props.findVideo(items.id.videoId)}>
                                 <td>{items.snippet.title}</td>
                                 <iframe width="130px" height="100px" src={items.snippet.thumbnails.default.url}></iframe>
                             </button>
