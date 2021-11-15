@@ -28,7 +28,7 @@ class App extends Component{
             shownVideoTitle: '',
             shownVideoDetail: '',
             query: '',
-            baseVideo: 'DxfEbulyFcY'
+            baseVideo: 'DxfEbulyFcY',
         }
     }
 
@@ -122,20 +122,19 @@ class App extends Component{
         console.log(this.state.videos)
     }
 
-    playVideo = (event) => {
-        let url = `https://www.youtube.com/embed/${this.state.baseVideo}`
-        return (
-            <iframe width="1400rem" height="800rem" src={url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        )
-    }
-
     findVideo = (videoId) => {
-        console.log(videoId)
-        this.videoId = videoId
+        console.log(videoId);
+        this.setState({
+            baseVideo : videoId
+        })
     }
 
-    setVideo = (event) => {
-
+    changeVideo = () => {
+        let url = 'https://www.youtube.com/embed/';
+        let baseVideo = this.state.baseVideo;
+        return (
+            <iframe width="1400rem" height="800rem" src={url + baseVideo} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        )
     }
 
 
@@ -185,7 +184,7 @@ class App extends Component{
                 <div className='videoContainer'>
                     <div className='videoPlayerLayer'>
                         <div className='videoPlayer'>
-                            <this.playVideo/>
+                        <this.changeVideo/>
                         </div>
                     </div>
                     <div>
