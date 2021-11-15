@@ -6,7 +6,14 @@ import { Component } from 'react';
 import './App.css'
 import CommentTable from './CommentTable/CommentTable';
 import VideoList from './VideoList/VideoList';
-import Header from './Header/Header';
+import MenuIcon from "@material-ui/icons/Menu";
+import SearchIcon from "@material-ui/icons/Search";
+import VideoCallIcon from "@material-ui/icons/VideoCall";
+import AppsIcon from "@material-ui/icons/Apps";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import { Avatar } from "@material-ui/core";
+import logo from "./logo.svg";
+import './Header/Header.css'
 
 
 class App extends Component{
@@ -20,8 +27,8 @@ class App extends Component{
             shownVideoID: '',
             shownVideoTitle: '',
             shownVideoDetail: '',
-            query: ''
-
+            query: '',
+            baseVideo: 'DxfEbulyFcY'
         }
     }
 
@@ -99,12 +106,13 @@ class App extends Component{
     }
 
     getVideos = async () => {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.state.query}&type=video&key=${googleapikey}&part=snippet`);
-        this.setState({
-              videos: response.data.items,
-            });
-        console.log(this.state.videos)
-    }
+        console.log(this.state.query)
+          let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${this.state.query}&type=video&key=${googleapikey}&part=snippet`);
+          this.setState({
+                videos: response.data.items,
+              });
+          console.log(this.state.videos)
+      }
 
     getDefaultVideos = async () => {
         let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=DxfEbulyFcY&type=video&key=${googleapikey}&part=snippet`);
@@ -114,20 +122,74 @@ class App extends Component{
         console.log(this.state.videos)
     }
 
+    playVideo = (event) => {
+        let url = `https://www.youtube.com/embed/${this.state.baseVideo}`
+        return (
+            <iframe width="1400rem" height="800rem" src={url} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        )
+    }
+
+    findVideo = (videoId) => {
+        console.log(videoId)
+        this.videoId = videoId
+    }
+
+    setVideo = (event) => {
+
+    }
+
+
     render(){
         return(
             <div>
                 <div className='videoHeader'>
-                    <Header getVideos={this.getVideos} handlesChanges={this.handleSubmit} handleSubmit={this.handleSubmit}/>
+                <div className="header">
+                    <div className="header__left">
+                        <MenuIcon style={{ color: "white" }} />
+                        
+                        <img className="header__logo" src={logo} alt="" />
+                        
+                    </div>
+                    <div className="header__input">
+                        <form onSubmit={this.handleSubmit}>
+                        <input type='text' name='query' onChange={this.handlesChanges} style={{
+                            flex: 1,
+                            border: "none",
+                            padding: "8.3px 20px",
+                            width: "30vw",
+                            backgroundColor: "#131313",
+                            color: "white",
+                            fontSize: "16px",
+                        }}/>
+                        <button type='submit'>
+                        <SearchIcon
+                            style={{ color: "#9b9b9b", padding: "4px 8px" }}
+                        /> </button>  
+                        </form>
+                        
+                        
+                    </div>
+                    <div className="header__right">
+                        <VideoCallIcon style={{ color: "white", marginLeft: "10px" }} />
+                        <AppsIcon style={{ color: "white", marginLeft: "20px" }} />
+                        <NotificationsIcon style={{ color: "white", marginLeft: "20px" }} />
+                        <Avatar
+                        style={{ height: "30px", width: "30px", marginLeft: "20px" }}
+                        className="avatar"
+                        src=""
+                        alt=""
+                        />
+                    </div>
+                    </div>
                 </div>
                 <div className='videoContainer'>
                     <div className='videoPlayerLayer'>
                         <div className='videoPlayer'>
-                            <iframe width="1600rem" height="900rem" src="https://www.youtube.com/embed/DxfEbulyFcY" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <this.playVideo/>
                         </div>
                     </div>
                     <div>
-                        <VideoList videos={this.state.videos}/>
+                        <VideoList videos={this.state.videos} findVideo={this.findVideo}/>
                     </div>
                 </div>
                 <div className="videoFooter">
