@@ -96,7 +96,7 @@ class App extends Component{
     }
 
     getVideoDetials = async () => {
-        let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${googleapikey}&part=snippet&type=video&id=DxfEbulyFcY`);
+        let response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?key=${googleapikey}&part=snippet&type=video&id=${this.state.baseVideo}`);
         this.setState({
                 shownVideoID: response.data.items[0].id,
                 shownVideoTitle: response.data.items[0].snippet.title,
@@ -127,6 +127,7 @@ class App extends Component{
         this.setState({
             baseVideo : videoId
         })
+        this.getVideoDetials();
     }
 
     changeVideo = () => {
