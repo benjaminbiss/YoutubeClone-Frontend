@@ -9,12 +9,18 @@
 }
 
 .comments {
-    justify-content: left;
-    align-items: center;
-    width: auto;
+    width: 90%;
     height: auto;
     margin-top: 25px;
     margin-left: 5%;
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+    padding: 10px;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
 }
 
 .videoFooter {

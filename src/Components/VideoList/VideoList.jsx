@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './VideoList.css'
 
 
 class VideoList extends Component {
@@ -18,7 +19,7 @@ class VideoList extends Component {
                         <tr>
                             <button onClick={() => this.props.findVideo(items.id.videoId)}>
                                 <td>{items.snippet.title}</td>
-                                <iframe width="100px" height="100px" src={items.snippet.thumbnails.default.url}></iframe>
+                                <iframe width="130px" height="100px" src={items.snippet.thumbnails.default.url}></iframe>
                             </button>
                         </tr>
                         )

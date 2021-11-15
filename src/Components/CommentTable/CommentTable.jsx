@@ -6,16 +6,14 @@ function CommentTable(props){
 
     return(
         <div className='table'>
-            <table>
+            <table className='commentTable' >
                 <tr>
-                    <th>Comment</th>
-                    <th></th>
-                    <th>Likes</th>
-                    <th>Dislikes</th>
                 </tr>
                 {props.comments.map((comment) => {
-                    return (
-                        <tr>
+                    if (comment.video_id === props.baseVideo) {
+                        
+                        return (
+                            <tr>
                             <tr>
                                 <td>{comment.comment}</td>
                                 <td><button onClick={() => props.getReplies(comment.id)}>View Replies</button></td>
@@ -29,13 +27,17 @@ function CommentTable(props){
                             {props.reply.map((reply) => {
                                 if (reply.comment_pk === comment.id) {
                                     return (
-                                        <tr className='reply'>{reply.reply}</tr>
+                                        <tr className='reply'>
+                                            <td></td>
+                                            <td>{reply.reply}</td>
+                                        </tr>
                                         
                                         )
                                     }
-                            })}
+                                })}
                         </tr>
                     )
+                }
                 })}
             </table>
         </div>

@@ -8,13 +8,14 @@ class Comments extends Component{
             comment: '',
             likes: 0,
             dislikes: 0,
-            video_id: ''
+            video_id: this.props.baseVideo
         }
     }
 
     handlesChanges = (event) => {
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            video_id: this.props.baseVideo,
         })
     }
 

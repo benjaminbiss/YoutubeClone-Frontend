@@ -197,9 +197,8 @@ class App extends Component{
                     <p>Video Details: {this.state.shownVideoDetail}</p>
                 </div>
                 <div className='comments'>
-                    <Comments makeNewComment={this.addComment} />
-                    <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike} reply={this.state.reply} makeNewReply={this.addReply}/>
-                    
+                    <Comments makeNewComment={this.addComment} baseVideo={this.state.baseVideo}/>
+                    <CommentTable comments={this.state.comments} like={this.like} dislike={this.dislike} reply={this.state.reply} makeNewReply={this.addReply} baseVideo={this.state.baseVideo}/>
                 </div>
             </div>
             )
