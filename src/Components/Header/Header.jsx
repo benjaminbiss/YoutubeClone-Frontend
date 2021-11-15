@@ -9,6 +9,7 @@ import AppsIcon from "@material-ui/icons/Apps";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { Avatar } from "@material-ui/core";
 import logo from "../logo.svg";
+import devCodeCampLogo from "../devCodeCampLogo.png";
 
 class Header extends Component {
     constructor(props) {
@@ -76,7 +77,7 @@ class Header extends Component {
         <Avatar
           style={{ height: "30px", width: "30px", marginLeft: "20px" }}
           className="avatar"
-          src=""
+          src={devCodeCampLogo}
           alt=""
         />
       </div>
